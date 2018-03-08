@@ -30,7 +30,6 @@ public class Robot extends TimedRobot {
 	
 	public static OI oi;
 
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -45,8 +44,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData(chassis);
 		SmartDashboard.putData(delivery);
 		SmartDashboard.putData(climb);
-		
-	
+		log();
 	}
 
 	/**
@@ -62,6 +60,7 @@ public class Robot extends TimedRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		log();
 	}
 
 	/**
@@ -85,6 +84,7 @@ public class Robot extends TimedRobot {
 
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		log();
 	}
 	
 	public void teleopInit() {
@@ -96,6 +96,9 @@ public class Robot extends TimedRobot {
 	
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		log();
+		boolean lift = oi.getoperator().getRawButton(1);
+		SmartDashboard.putBoolean("lift: ", lift);
 	}
 
 	/**
@@ -103,5 +106,12 @@ public class Robot extends TimedRobot {
 	 */
 	
 	public void testPeriodic() {
+		log();
+	}
+	
+	public void log() {
+		delivery.log();
+		climb.log();
+		chassis.log();
 	}
 }

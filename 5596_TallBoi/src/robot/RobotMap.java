@@ -9,12 +9,10 @@ public class RobotMap {
 	public static int CLIMB  = 4;
 
 	//Pneumatics
-	public static int RSHIFTER   = 0;
-	public static int LSHIFTER   = 1;
-	public static int LINTAKE1 = 2;
-	public static int LINTAKE2   = 3;
-	public static int RINTAKE1   = 4;
-	public static int RINTAKE2   = 5;
+	public static int RSHIFTER   = 2;
+	public static int LSHIFTER   = 3;
+	public static int LINTAKE    = 0;
+	public static int RINTAKE    = 1;
 	public static int ENGAGE1    = 6;
 	public static int ENGAGE2    = 7;
 	
@@ -39,4 +37,5 @@ public class RobotMap {
 	//Game controllers
 	public static int DRIVER = 0;
 	public static int OPERATOR = 1;
+	public static int MANUAL = 2;
 }

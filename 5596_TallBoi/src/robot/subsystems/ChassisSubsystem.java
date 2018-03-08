@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 import robot.commands.DriveWithJoystick;
 
@@ -50,6 +51,14 @@ public class ChassisSubsystem extends Subsystem {
 		return (m_lencoder.getDistance() + m_rencoder.getDistance()) / 2;
 	}
     
+    public double getRateLeft() {
+    	return m_lencoder.getRate();
+    }
+    
+    public double getRateRight() {
+    	return m_rencoder.getRate();
+    }
+    
     public void setTurbo(boolean turbo) {
     	if(turbo == true) {
     		m_turbo = true;
@@ -62,5 +71,12 @@ public class ChassisSubsystem extends Subsystem {
     
     public boolean getTurbo() {
     	return m_turbo;
+    }
+    
+    public void log() {
+    	SmartDashboard.putBoolean("Turbo: ", getTurbo());
+    	SmartDashboard.putNumber("Left motor: ", getRateLeft());
+    	SmartDashboard.putNumber("Right motor: ", getRateRight());
+//    	SmartDashboard.putNumber("Heading ":, getHeading());
     }
 }

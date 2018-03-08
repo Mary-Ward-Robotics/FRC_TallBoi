@@ -57,6 +57,7 @@ public class ClimbSubsystem extends Subsystem {
     
     public void log() {
     	SmartDashboard.putNumber("ClimbPot Voltage: " , getPotValue());
+    	SmartDashboard.putNumber("motor", m_climb.get());
     }
 }
 

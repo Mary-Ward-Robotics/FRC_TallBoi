@@ -15,24 +15,24 @@ import robot.RobotMap;
 public class DeliverySubsystem extends Subsystem {
 	private Spark m_intake = new Spark(RobotMap.INTAKE);
 	private Spark m_lift = new Spark(RobotMap.LIFT);
-	private DoubleSolenoid m_clawL = new DoubleSolenoid(RobotMap.LINTAKE1, RobotMap.LINTAKE2);
-	private DoubleSolenoid m_clawR = new DoubleSolenoid(RobotMap.RINTAKE1, RobotMap.RINTAKE2);
+	private DoubleSolenoid m_claw = new DoubleSolenoid(RobotMap.LINTAKE, RobotMap.RINTAKE);
 	private DoubleSolenoid m_engage = new DoubleSolenoid(RobotMap.ENGAGE1, RobotMap.ENGAGE2);
 	private AnalogInput m_liftPot = new AnalogInput(RobotMap.LIFTPOT);
 	private DigitalInput m_boxSwitch = new DigitalInput(RobotMap.BOXSWITCH);
 	
 	
 	private boolean open = false;
+	private boolean engaged = false;
 
     public void initDefaultCommand() {
     }
     
-    public void setLiftUp() {
-    	m_lift.set(-1);
+    public void setLiftUp(double speed) {
+    	m_lift.set(speed);
     }
     
-    public void setLiftDown() {
-    	m_lift.set(1);
+    public void setLiftDown(double speed) {
+    	m_lift.set(-speed);
     }
  
     public void setLiftStop() {
@@ -52,14 +52,12 @@ public class DeliverySubsystem extends Subsystem {
     }
 
     public void openClaw() {
-    	m_clawL.set(Value.kReverse);
-    	m_clawR.set(Value.kReverse);
+    	m_claw.set(Value.kReverse);
     	open = true;
     }
     
     public void closeClaw() {
-    	m_clawL.set(Value.kForward);
-    	m_clawR.set(Value.kForward);
+    	m_claw.set(Value.kForward);
     	open = false;
     }
     
@@ -77,16 +75,24 @@ public class DeliverySubsystem extends Subsystem {
     
     public void engageOn() {
     	m_engage.set(Value.kForward);
+    	engaged = true;
     }
     
     public void engageOff() {
     	m_engage.set(Value.kReverse);
+    	engaged = false;
+    }
+    
+    public boolean getEngaged() {
+    	return engaged;
     }
     
     public void log() {
     	SmartDashboard.putNumber("LiftPot Voltage: ", getLiftPotValue());
     	SmartDashboard.putBoolean("Has Box: ", getBoxSwitch());
     	SmartDashboard.putBoolean("Claw Open: ", getClawOpen());
+    	SmartDashboard.putNumber("lift speed: ", m_lift.get());
+    	SmartDashboard.putNumber("Intake Speed: ", m_intake.get());
+    	SmartDashboard.putBoolean("Engaged", getEngaged());
     }
 }
-

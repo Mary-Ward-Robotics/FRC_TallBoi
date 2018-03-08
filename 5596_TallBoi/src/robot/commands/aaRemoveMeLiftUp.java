@@ -3,12 +3,11 @@ package robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
 
-/**
- *
- */
-public class aaRemoveMeLiftUp extends Command {
 
-    public aaRemoveMeLiftUp() {
+public class aaRemoveMeLiftUp extends Command {
+	double speed;
+    public aaRemoveMeLiftUp(double spd) {
+    	speed = spd;
         requires(Robot.delivery);
     }
 
@@ -18,7 +17,7 @@ public class aaRemoveMeLiftUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.delivery.setLiftUp();
+    	Robot.delivery.setLiftUp(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

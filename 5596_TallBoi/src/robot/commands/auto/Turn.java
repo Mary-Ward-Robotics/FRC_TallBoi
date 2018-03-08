@@ -1,17 +1,15 @@
-package robot.commands;
+package robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
-import robot.Robot;
 
 /**
  *
  */
-public class aaRemoveMeLiftDown extends Command {
-	double speed;
-	
-    public aaRemoveMeLiftDown(double spd) {
-    	speed = spd;
-    	requires(Robot.delivery);
+public class Turn extends Command {
+
+    public Turn() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -20,17 +18,15 @@ public class aaRemoveMeLiftDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.delivery.setLiftDown(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.oi.getLiftDown();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.delivery.setLiftStop();
     }
 
     // Called when another command which requires one or more of the same

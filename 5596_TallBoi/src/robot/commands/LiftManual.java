@@ -6,10 +6,10 @@ import robot.Robot;
 /**
  *
  */
-public class aaRemoveMeLiftDown extends Command {
-	double speed;
+public class LiftManual extends Command {
+double speed;
 	
-    public aaRemoveMeLiftDown(double spd) {
+    public LiftManual(double spd) {
     	speed = spd;
     	requires(Robot.delivery);
     }
@@ -20,7 +20,7 @@ public class aaRemoveMeLiftDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.delivery.setLiftDown(speed);
+    	Robot.delivery.setLiftDown(speed/2);
     }
 
     // Make this return true when this Command no longer needs to run execute()
