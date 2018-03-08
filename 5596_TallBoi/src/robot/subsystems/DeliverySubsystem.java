@@ -2,7 +2,6 @@ package robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -85,7 +84,9 @@ public class DeliverySubsystem extends Subsystem {
     }
     
     public void log() {
-    	SmartDashboard.putData("Lift point", (AnalogInput) m_liftPot);
+    	SmartDashboard.putNumber("LiftPot Voltage: ", getLiftPotValue());
+    	SmartDashboard.putBoolean("Has Box: ", getBoxSwitch());
+    	SmartDashboard.putBoolean("Claw Open: ", getClawOpen());
     }
 }
 
