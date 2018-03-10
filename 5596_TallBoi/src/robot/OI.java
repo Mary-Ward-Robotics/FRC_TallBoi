@@ -24,10 +24,6 @@ import robot.commands.TurboOn;
 import robot.commands.aaRemoveMeLiftDown;
 import robot.commands.aaRemoveMeLiftUp;
 
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
 public class OI {
 	private Joystick driver = new Joystick(RobotMap.DRIVER);
 	private Joystick operator = new Joystick(RobotMap.OPERATOR);
@@ -35,17 +31,21 @@ public class OI {
 	
 	//create joystick buttons
 		private int
-			//operator buttons
-			O_BT1 = 1, O_BT2 = 2, O_BT3 = 3, O_BT4 = 4, O_BT5 = 5, O_BT6 = 6,
-			O_BT7 = 7, O_BT8 = 8, O_BT9 = 9, O_BT10 = 10, O_BT11 = 11, O_BT12 = 12,
+			//operator buttons logitech
+//			O_SCALE = 9, O_SWITCH = 11, O_EXCHANGE = 16, O_RESET = 17, O_UPC = 10, O_UPD = 12,
+//			O_BOXIN = 3, O_BOXCLOSE = 8, /*O_BT9 = 9,*/ O_ENGAGE = 1, O_BOXOUT = 4, O_BOXOPEN = 7,
+			
+			//operator buttons panel
+		O_SCALE = 2, O_SWITCH = 3, O_EXCHANGE = 4, O_RESET = 5, O_UPC = 6, O_UPD = 7,
+		O_BOXIN = 8, O_BOXCLOSE = 9, /*O_BT9 = 10,*/ O_ENGAGE = 11, O_BOXOUT = 12, O_BOXOPEN = 13,
 			
 			//driver buttons
-			D_LOW = 4, D_HIGH = 5,
+			D_LOW = 5, D_HIGH = 6,
 			//driver sticks
-			D_THROTTLE = 1, D_TURN = 4,
+			D_LEFT = 1, D_RIGHT = 5,
 			
 			//manual button
-			M_SAFETY = 0,
+			M_SAFETY = 1,
 			//manual stick
 			M_STICK = 1;
 		private JoystickButton
@@ -55,26 +55,26 @@ public class OI {
 			liftScale, liftSwitch, liftExchange, liftReset,
 			climbUp, climbDown, intakeIn, intakeClose,
 			intakeEngage, intakeOut, intakeOpen,
-			
+
 			manualSafety;
 
 	public OI() {
 		//assign buttons
-		liftScale    = new JoystickButton(operator, O_BT1);
-		liftSwitch   = new JoystickButton(operator, O_BT2);
-		liftExchange = new JoystickButton(operator, O_BT3);
-		liftReset    = new JoystickButton(operator, O_BT4);
-		climbUp      = new JoystickButton(operator, O_BT5);
-		climbDown    = new JoystickButton(operator, O_BT6);
-		intakeIn     = new JoystickButton(operator, O_BT7);
-		intakeClose  = new JoystickButton(operator, O_BT8);
+		liftScale    = new JoystickButton(operator, O_SCALE);
+		liftSwitch   = new JoystickButton(operator, O_SWITCH);
+		liftExchange = new JoystickButton(operator, O_EXCHANGE);
+		liftReset    = new JoystickButton(operator, O_RESET);
+		climbUp      = new JoystickButton(operator, O_UPC);
+		climbDown    = new JoystickButton(operator, O_UPD);
+		intakeIn     = new JoystickButton(operator, O_BOXIN);
+		intakeClose  = new JoystickButton(operator, O_BOXCLOSE);
 //		climbLock    = new JoystickButton(operator, O_BT9);
-		intakeEngage = new JoystickButton(operator, O_BT10);
-		intakeOut    = new JoystickButton(operator, O_BT11);
-		intakeOpen   = new JoystickButton(operator, O_BT12);
+		intakeEngage = new JoystickButton(operator, O_ENGAGE);
+		intakeOut    = new JoystickButton(operator, O_BOXOUT);
+		intakeOpen   = new JoystickButton(operator, O_BOXOPEN);
 		
-		turboTrue    = new JoystickButton(driver, 4);
-		turboFalse   = new JoystickButton(driver, 5);
+		turboTrue    = new JoystickButton(driver, D_HIGH);
+		turboFalse   = new JoystickButton(driver, D_LOW);
 
 		manualSafety = new JoystickButton(manual, 1);
 		
@@ -98,8 +98,8 @@ public class OI {
 		double liftAxis = manual.getRawAxis(1);
 		manualSafety.whenActive(new LiftManual(liftAxis));
 	
-		liftScale.whenPressed(new aaRemoveMeLiftUp(1));
-		liftSwitch.whenPressed(new aaRemoveMeLiftUp(-1));
+		liftScale.whenPressed(new aaRemoveMeLiftUp(0.6));
+		liftSwitch.whenPressed(new aaRemoveMeLiftDown(0.6));
 	}
 	
 	//misc
@@ -111,36 +111,40 @@ public class OI {
 		return operator;
 	}
 	
-	public double getTurn() {
-		return driver.getRawAxis(4);
+	public double getLeft() {
+		return driver.getRawAxis(D_LEFT);
 	}
 	
-	public double getThrottle() {
-		return driver.getRawAxis(1);
+	public double getRight() {
+		return driver.getRawAxis(D_RIGHT);
 	}
 	
 	public boolean getClimbUp() {
-		return operator.getRawButton(O_BT5);
+		return operator.getRawButton(O_UPC);
 	}
 	
 	public boolean getClimbDown() {
-		return !operator.getRawButton(O_BT6);
+		return operator.getRawButton(O_UPD);
 	}
 	
 	public boolean getIntakeIn() {
-		return operator.getRawButton(O_BT7);
+		return operator.getRawButton(O_BOXIN);
 	}
 	
 	public boolean getIntakeOut() {
-		return operator.getRawButton(O_BT11);
+		return operator.getRawButton(O_BOXOUT);
 	}
 	
 	//TODO remove me
 	public boolean getLiftUp() {
-		return operator.getRawButton(O_BT1);
+		return operator.getRawButton(O_SCALE);
 	}
 	
 	public boolean getLiftDown() {
-		return operator.getRawButton(O_BT2);
+		return operator.getRawButton(O_SWITCH);
+	}
+	
+	public boolean getLiftManual() {
+		return manual.getRawButton(M_SAFETY);
 	}
 }

@@ -1,18 +1,15 @@
 package robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 
-/**
- *
- */
 public class ClimbSubsystem extends Subsystem {
 	private Spark m_climb = new Spark(RobotMap.CLIMB);
-	private AnalogInput m_climbPot = new AnalogInput(RobotMap.CLIMBPOT);
+	private AnalogPotentiometer m_climbPot = new AnalogPotentiometer(RobotMap.CLIMBPOT);
 	
 	private Timer timer = new Timer();
 	
@@ -35,7 +32,7 @@ public class ClimbSubsystem extends Subsystem {
     }
     
     public double getPotValue(){
-    	return m_climbPot.getVoltage();
+    	return m_climbPot.get();
     }
     
     public double getPotRate() {

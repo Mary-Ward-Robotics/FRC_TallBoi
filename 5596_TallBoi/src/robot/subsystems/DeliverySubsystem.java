@@ -2,7 +2,7 @@ package robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,7 +17,7 @@ public class DeliverySubsystem extends Subsystem {
 	private Spark m_lift = new Spark(RobotMap.LIFT);
 	private DoubleSolenoid m_claw = new DoubleSolenoid(RobotMap.LINTAKE, RobotMap.RINTAKE);
 	private DoubleSolenoid m_engage = new DoubleSolenoid(RobotMap.ENGAGE1, RobotMap.ENGAGE2);
-	private AnalogInput m_liftPot = new AnalogInput(RobotMap.LIFTPOT);
+	private AnalogPotentiometer m_liftPot = new AnalogPotentiometer(RobotMap.LIFTPOT);
 	private DigitalInput m_boxSwitch = new DigitalInput(RobotMap.BOXSWITCH);
 	
 	
@@ -28,11 +28,11 @@ public class DeliverySubsystem extends Subsystem {
     }
     
     public void setLiftUp(double speed) {
-    	m_lift.set(speed);
+    	m_lift.set(-speed);
     }
     
     public void setLiftDown(double speed) {
-    	m_lift.set(-speed);
+    	m_lift.set(speed);
     }
  
     public void setLiftStop() {
@@ -52,12 +52,12 @@ public class DeliverySubsystem extends Subsystem {
     }
 
     public void openClaw() {
-    	m_claw.set(Value.kReverse);
+    	m_claw.set(Value.kForward);
     	open = true;
     }
     
     public void closeClaw() {
-    	m_claw.set(Value.kForward);
+    	m_claw.set(Value.kReverse);
     	open = false;
     }
     
@@ -66,7 +66,7 @@ public class DeliverySubsystem extends Subsystem {
     }
     
     public double getLiftPotValue() {
-    	return m_liftPot.getVoltage();
+    	return m_liftPot.get();
     }
     
     public boolean getBoxSwitch() {

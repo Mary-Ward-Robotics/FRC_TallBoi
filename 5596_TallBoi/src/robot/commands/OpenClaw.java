@@ -1,16 +1,15 @@
 package robot.commands;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
 
 /**
  *
  */
-public class OpenClaw extends TimedCommand {
+public class OpenClaw extends Command {
 	private boolean commandDone = false;
 
     public OpenClaw() {
-    	super(1);
         requires(Robot.delivery);
     }
 
@@ -19,6 +18,7 @@ public class OpenClaw extends TimedCommand {
 
     protected void execute() {
     	Robot.delivery.openClaw();
+    	commandDone = true;
     }
 
     protected boolean isFinished() {

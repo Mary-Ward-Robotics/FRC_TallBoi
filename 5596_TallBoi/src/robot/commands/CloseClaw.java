@@ -17,21 +17,11 @@ public class CloseClaw extends Command {
     }
 
     protected void execute() {
-    	if(Robot.delivery.getClawOpen() == false) {
-    		commandDone = true;
-    	} else {
-    		Robot.delivery.closeClaw();
-    		commandDone = true;
-    	}
+    	Robot.delivery.closeClaw();
+    	commandDone = true;
     }
 
     protected boolean isFinished() {
         return commandDone;
-    }
-
-    protected void end() {
-    }
-
-    protected void interrupted() {
     }
 }

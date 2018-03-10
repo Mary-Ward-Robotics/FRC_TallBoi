@@ -13,11 +13,11 @@ public class DriveWithJoystick extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		double turn = Robot.oi.getTurn();
-		double throttle = Robot.oi.getThrottle();
+		double lspeed = Robot.oi.getLeft();
+		double rspeed = Robot.oi.getRight();
 		
-		double leftdrive = throttle-turn;
-		double rightdrive = throttle+turn;
+		double leftdrive = lspeed;
+		double rightdrive = rspeed;
 		
 		Robot.chassis.drive(leftdrive, rightdrive);
 	}
