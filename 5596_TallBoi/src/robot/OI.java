@@ -25,74 +25,50 @@ import robot.commands.aaRemoveMeLiftDown;
 import robot.commands.aaRemoveMeLiftUp;
 
 public class OI {
-	private Joystick driver = new Joystick(RobotMap.DRIVER);
-	private Joystick operator = new Joystick(RobotMap.OPERATOR);
-	private Joystick manual = new Joystick(RobotMap.MANUAL);
-	
-	//create joystick buttons
-		private int
-			//operator buttons logitech
-//			O_SCALE = 9, O_SWITCH = 11, O_EXCHANGE = 16, O_RESET = 17, O_UPC = 10, O_UPD = 12,
-//			O_BOXIN = 3, O_BOXCLOSE = 8, /*O_BT9 = 9,*/ O_ENGAGE = 1, O_BOXOUT = 4, O_BOXOPEN = 7,
-			
-			//operator buttons panel
-		O_SCALE = 2, O_SWITCH = 3, O_EXCHANGE = 4, O_RESET = 5, O_UPC = 6, O_UPD = 7,
-		O_BOXIN = 8, O_BOXCLOSE = 9, /*O_BT9 = 10,*/ O_ENGAGE = 11, O_BOXOUT = 12, O_BOXOPEN = 13,
-			
-			//driver buttons
-			D_LOW = 5, D_HIGH = 6,
-			//driver sticks
-			D_LEFT = 1, D_RIGHT = 5,
-			
-			//manual button
-			M_SAFETY = 1,
-			//manual stick
-			M_STICK = 1;
-		private JoystickButton
-			turboTrue, turboFalse;
-		
+	private Joystick driver = new Joystick(JoystickMap.DRIVER);
+	private Joystick operator = new Joystick(JoystickMap.OPERATOR);
+	private Joystick manual = new Joystick(JoystickMap.MANUAL);
+
 		private JoystickButton 
 			liftScale, liftSwitch, liftExchange, liftReset,
 			climbUp, climbDown, intakeIn, intakeClose,
-			intakeEngage, intakeOut, intakeOpen,
-
-			manualSafety;
+			intakeEngage, intakeOut, intakeOpen, 
+			turboHigh, turboLow, manualSafety;
 
 	public OI() {
 		//assign buttons
-		liftScale    = new JoystickButton(operator, O_SCALE);
-		liftSwitch   = new JoystickButton(operator, O_SWITCH);
-		liftExchange = new JoystickButton(operator, O_EXCHANGE);
-		liftReset    = new JoystickButton(operator, O_RESET);
-		climbUp      = new JoystickButton(operator, O_UPC);
-		climbDown    = new JoystickButton(operator, O_UPD);
-		intakeIn     = new JoystickButton(operator, O_BOXIN);
-		intakeClose  = new JoystickButton(operator, O_BOXCLOSE);
-//		climbLock    = new JoystickButton(operator, O_BT9);
-		intakeEngage = new JoystickButton(operator, O_ENGAGE);
-		intakeOut    = new JoystickButton(operator, O_BOXOUT);
-		intakeOpen   = new JoystickButton(operator, O_BOXOPEN);
+		liftScale    = new JoystickButton(operator, JoystickMap.BB_SCALE);
+		liftSwitch   = new JoystickButton(operator, JoystickMap.BB_SWITCH);
+		liftExchange = new JoystickButton(operator, JoystickMap.BB_EXCHANGE);
+		liftReset    = new JoystickButton(operator, JoystickMap.BB_RESET);
+		climbUp      = new JoystickButton(operator, JoystickMap.BB_CLIMBUP);
+		climbDown    = new JoystickButton(operator, JoystickMap.BB_CLIMBDOWN);
+		intakeIn     = new JoystickButton(operator, JoystickMap.BB_BOXIN);
+		intakeClose  = new JoystickButton(operator, JoystickMap.BB_BOXCLOSE);
+		intakeEngage = new JoystickButton(operator, JoystickMap.BB_ENGAGE);
+		intakeOut    = new JoystickButton(operator, JoystickMap.BB_BOXOUT);
+		intakeOpen   = new JoystickButton(operator, JoystickMap.BB_BOXOPEN);
 		
-		turboTrue    = new JoystickButton(driver, D_HIGH);
-		turboFalse   = new JoystickButton(driver, D_LOW);
+		turboHigh    = new JoystickButton(driver, JoystickMap.XB_HIGH);
+		turboLow     = new JoystickButton(driver, JoystickMap.XB_LOW);
 
-		manualSafety = new JoystickButton(manual, 1);
+		manualSafety = new JoystickButton(manual, JoystickMap.LT_OVERIDE);
 		
 		//assign commands
-		turboTrue.whenPressed(new TurboOn());
-		turboFalse.whenPressed(new TurboOff());
+		turboHigh.whenPressed(new TurboOn());
+		turboLow.whenPressed(new TurboOff());
 		
 		//climb control
-		climbUp.whenPressed(new ClimbUp());
-		climbDown.whenPressed(new ClimbDown());
+		climbUp.whenActive(new ClimbUp());
+		climbDown.whenActive(new ClimbDown());
 		
 		//delivery control
-		intakeIn.whenPressed(new IntakeIn());
-		intakeOut.whenPressed(new IntakeOut());
+		intakeIn.whenActive(new IntakeIn());
+		intakeOut.whenActive(new IntakeOut());
 		
 		intakeOpen.whenPressed(new OpenClaw());
 		intakeClose.whenPressed(new CloseClaw());
-		intakeEngage.whenPressed(new EngageOn());
+		intakeEngage.whenActive(new EngageOn());
 		
 		//TODO kill me please TY
 		double liftAxis = manual.getRawAxis(1);
@@ -111,40 +87,7 @@ public class OI {
 		return operator;
 	}
 	
-	public double getLeft() {
-		return driver.getRawAxis(D_LEFT);
-	}
-	
-	public double getRight() {
-		return driver.getRawAxis(D_RIGHT);
-	}
-	
-	public boolean getClimbUp() {
-		return operator.getRawButton(O_UPC);
-	}
-	
-	public boolean getClimbDown() {
-		return operator.getRawButton(O_UPD);
-	}
-	
-	public boolean getIntakeIn() {
-		return operator.getRawButton(O_BOXIN);
-	}
-	
-	public boolean getIntakeOut() {
-		return operator.getRawButton(O_BOXOUT);
-	}
-	
-	//TODO remove me
-	public boolean getLiftUp() {
-		return operator.getRawButton(O_SCALE);
-	}
-	
-	public boolean getLiftDown() {
-		return operator.getRawButton(O_SWITCH);
-	}
-	
-	public boolean getLiftManual() {
-		return manual.getRawButton(M_SAFETY);
+	public Joystick getManual() {
+		return manual;
 	}
 }

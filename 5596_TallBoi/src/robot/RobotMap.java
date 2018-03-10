@@ -33,9 +33,4 @@ public class RobotMap {
 	public static int CLIMBPOT    = 1;
 	//CAN
 	public static int PIDGEON     = 0; //gadgeteer pidgeon
-		
-	//Game controllers
-	public static int DRIVER = 0;
-	public static int OPERATOR = 1;
-	public static int MANUAL = 2;
 }

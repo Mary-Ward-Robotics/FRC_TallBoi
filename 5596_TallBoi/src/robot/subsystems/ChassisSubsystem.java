@@ -22,6 +22,9 @@ public class ChassisSubsystem extends Subsystem {
 	double rate = 0;
 	double maxspeed = 0;
 	
+	int c_ldrive = robot.JoystickMap.XB_LEFT;
+	int c_rdrive = robot.JoystickMap.XB_RIGHT;
+	
 	public ChassisSubsystem(){
 		m_lencoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
 		m_rencoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
@@ -32,7 +35,7 @@ public class ChassisSubsystem extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new DriveWithJoystick());
+    	setDefaultCommand(new DriveWithJoystick(c_ldrive, c_rdrive));
 	}
     
     

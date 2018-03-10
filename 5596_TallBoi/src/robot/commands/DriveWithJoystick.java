@@ -1,25 +1,29 @@
 package robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
 
 
 public class DriveWithJoystick extends Command {
+	private int left;
+	private int right;
+	private Joystick driver;
 	
-	public DriveWithJoystick() {
+	public DriveWithJoystick(int lStick, int rStick) {
 		requires(Robot.chassis);
+		left  = lStick;
+		right = rStick;
+		driver = Robot.oi.getdriver();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		double lspeed = Robot.oi.getLeft();
-		double rspeed = Robot.oi.getRight();
+		double lspeed = driver.getRawAxis(left);
+		double rspeed = driver.getRawAxis(right);
 		
-		double leftdrive = lspeed;
-		double rightdrive = rspeed;
-		
-		Robot.chassis.drive(leftdrive, rightdrive);
+		Robot.chassis.drive(lspeed, rspeed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
