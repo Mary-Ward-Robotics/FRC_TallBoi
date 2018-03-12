@@ -8,13 +8,12 @@
 package robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.subsystems.ChassisSubsystem;
 import robot.subsystems.ClimbSubsystem;
 import robot.subsystems.DeliverySubsystem;
+import robot.subsystems.TechnicalSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,6 +26,7 @@ public class Robot extends TimedRobot {
 	public static ClimbSubsystem climb;
 	public static ChassisSubsystem chassis;
 	public static DeliverySubsystem delivery;
+	public static TechnicalSubsystem technical;
 	
 	public static OI oi;
 
@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
 		chassis = new ChassisSubsystem();
 		delivery = new DeliverySubsystem();
 		climb = new ClimbSubsystem();
+		technical = new TechnicalSubsystem();
 		oi = new OI();
 		
 		SmartDashboard.putData(chassis);
@@ -113,5 +114,6 @@ public class Robot extends TimedRobot {
 		delivery.log();
 		climb.log();
 		chassis.log();
+		technical.log();
 	}
 }

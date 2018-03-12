@@ -1,14 +1,14 @@
-package robot.commands;
+package robot.commands.operator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
 
 
-public class TurboOff extends Command {
-	boolean command_done = false;
-	
-    public TurboOff() {
-        requires(Robot.chassis);
+public class aaRemoveMeLiftUp extends Command {
+	double speed;
+    public aaRemoveMeLiftUp(double spd) {
+    	speed = spd;
+        requires(Robot.delivery);
     }
 
     // Called just before this Command runs the first time
@@ -17,21 +17,17 @@ public class TurboOff extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.chassis.getTurbo() == false) {
-    		command_done = true;
-    	} else {
-    		Robot.chassis.setTurbo(false);
-    		command_done = true;
-    	}
+    	Robot.delivery.setLiftUp(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return command_done;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.delivery.setLiftStop();
     }
 
     // Called when another command which requires one or more of the same

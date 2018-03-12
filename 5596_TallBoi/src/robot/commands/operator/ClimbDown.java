@@ -1,4 +1,4 @@
-package robot.commands;
+package robot.commands.operator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
@@ -6,11 +6,10 @@ import robot.Robot;
 /**
  *
  */
-public class EngageOn extends Command {
-	boolean isFinish = false;
-
-    public EngageOn() {
-        requires(Robot.delivery);
+public class ClimbDown extends Command {
+	
+    public ClimbDown() {
+        requires(Robot.climb);
     }
 
     // Called just before this Command runs the first time
@@ -19,18 +18,17 @@ public class EngageOn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.delivery.engageOn();
-    	isFinish = true;
+    	Robot.climb.setClimbDown();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isFinish;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.delivery.engageOff();
+    	Robot.climb.setClimbStop();
     }
 
     // Called when another command which requires one or more of the same

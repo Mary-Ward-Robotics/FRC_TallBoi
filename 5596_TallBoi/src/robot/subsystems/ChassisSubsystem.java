@@ -1,5 +1,7 @@
 package robot.subsystems;
 
+import com.ctre.phoenix.sensors.PigeonIMU;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
@@ -7,15 +9,17 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
-import robot.commands.DriveWithJoystick;
+import robot.commands.driver.DriveWithJoystick;
 
 
 public class ChassisSubsystem extends Subsystem {
 	private Spark m_ldrive = new Spark(RobotMap.LDRIVE);
 	private Spark m_rdrive = new Spark(RobotMap.RDRIVE);
+	private DoubleSolenoid m_shifter = new DoubleSolenoid(RobotMap.LSHIFTER,RobotMap.RSHIFTER);
+	
 	private Encoder m_lencoder = new Encoder(RobotMap.LENCODERS1, RobotMap.LENCODERS2);
 	private Encoder m_rencoder = new Encoder(RobotMap.RENCODERS1, RobotMap.RENCODERS2);
-	private DoubleSolenoid m_shifter = new DoubleSolenoid(RobotMap.LSHIFTER,RobotMap.RSHIFTER);
+	private PigeonIMU m_gyro   = new PigeonIMU(RobotMap.PIGEON);
 	
 	private boolean m_turbo = false;
 	
@@ -32,6 +36,7 @@ public class ChassisSubsystem extends Subsystem {
 	}
 	
 	public void init() {
+		m_gyro.setFusedHeadingToCompass(1);
 	}
 
     public void initDefaultCommand() {
@@ -39,17 +44,13 @@ public class ChassisSubsystem extends Subsystem {
 	}
     
     
-    //tank drive
+    //motors
     public void drive(double left, double right) {
     	m_ldrive.set(left);
     	m_rdrive.set(-right);
     }
     
-    public void reset() {
-		m_lencoder.reset();
-		m_rencoder.reset();
-	}
-    
+    //encoders
     public double getDistance() {
 		return (m_lencoder.getDistance() + m_rencoder.getDistance()) / 2;
 	}
@@ -62,6 +63,7 @@ public class ChassisSubsystem extends Subsystem {
     	return m_rencoder.getRate();
     }
     
+    //gear shift
     public void setTurbo(boolean turbo) {
     	if(turbo == true) {
     		m_turbo = true;
@@ -76,10 +78,31 @@ public class ChassisSubsystem extends Subsystem {
     	return m_turbo;
     }
     
+    //gyro
+    public double getHeading() {
+    	return m_gyro.getCompassHeading();
+    }
+    
+    public double getAngle() {
+    	return m_gyro.getAbsoluteCompassHeading();
+    }
+    
+    public void resetGyro() {
+    	m_gyro.setCompassAngle(0,1);
+    }
+    
+    //misc  
+    public void reset() {
+		m_lencoder.reset();
+		m_rencoder.reset();
+	}
+    
+    
     public void log() {
     	SmartDashboard.putBoolean("Turbo: ", getTurbo());
     	SmartDashboard.putNumber("Left motor: ", getRateLeft());
     	SmartDashboard.putNumber("Right motor: ", getRateRight());
-//    	SmartDashboard.putNumber("Heading ":, getHeading());
+    	SmartDashboard.putNumber("Heading: ", getHeading());
+    	SmartDashboard.putNumber("Angle : ", getAngle());
     }
 }

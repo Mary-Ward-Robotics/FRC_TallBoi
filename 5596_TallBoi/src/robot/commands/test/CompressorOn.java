@@ -1,4 +1,4 @@
-package robot.commands;
+package robot.commands.test;
 
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
@@ -6,33 +6,31 @@ import robot.Robot;
 /**
  *
  */
-public class aaRemoveMeLiftDown extends Command {
-	double speed;
-	
-    public aaRemoveMeLiftDown(double spd) {
-    	speed = spd;
-    	requires(Robot.delivery);
+public class CompressorOn extends Command {
+	private static boolean commandDone = false;
+    public CompressorOn() {
+        requires(Robot.technical);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	commandDone = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.delivery.setLiftDown(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return commandDone;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.delivery.setLiftStop();
+    	Robot.technical.Cstart();
     }
-
+    
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {

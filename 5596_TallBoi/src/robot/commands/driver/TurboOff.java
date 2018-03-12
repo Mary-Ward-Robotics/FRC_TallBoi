@@ -1,15 +1,14 @@
-package robot.commands;
+package robot.commands.driver;
 
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
 
-/**
- *
- */
-public class ClimbUp extends Command {
 
-    public ClimbUp() {
-        requires(Robot.climb);
+public class TurboOff extends Command {
+	boolean command_done = false;
+	
+    public TurboOff() {
+        requires(Robot.chassis);
     }
 
     // Called just before this Command runs the first time
@@ -18,17 +17,21 @@ public class ClimbUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climb.setClimbUp();
+    	if(Robot.chassis.getTurbo() == false) {
+    		command_done = true;
+    	} else {
+    		Robot.chassis.setTurbo(false);
+    		command_done = true;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return command_done;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.climb.setClimbStop();
     }
 
     // Called when another command which requires one or more of the same

@@ -8,28 +8,25 @@
 package robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
-import robot.commands.ClimbDown;
-import robot.commands.ClimbUp;
-import robot.commands.CloseClaw;
-import robot.commands.EngageOn;
-import robot.commands.IntakeIn;
-import robot.commands.IntakeOut;
-import robot.commands.LiftManual;
-import robot.commands.OpenClaw;
-import robot.commands.TurboOff;
-import robot.commands.TurboOn;
-import robot.commands.aaRemoveMeLiftDown;
-import robot.commands.aaRemoveMeLiftUp;
+import robot.commands.driver.TurboOff;
+import robot.commands.driver.TurboOn;
+import robot.commands.operator.ClimbDown;
+import robot.commands.operator.ClimbUp;
+import robot.commands.operator.CloseClaw;
+import robot.commands.operator.IntakeIn;
+import robot.commands.operator.IntakeOut;
+import robot.commands.operator.LiftManual;
+import robot.commands.operator.OpenClaw;
+import robot.commands.operator.aaRemoveMeLiftDown;
+import robot.commands.operator.aaRemoveMeLiftUp;
 
 public class OI {
-	private Joystick driver = new Joystick(JoystickMap.DRIVER);
-	private Joystick operator = new Joystick(JoystickMap.OPERATOR);
-	private Joystick manual = new Joystick(JoystickMap.MANUAL);
+	private final Joystick driver = new Joystick(JoystickMap.DRIVER);
+	private final Joystick operator = new Joystick(JoystickMap.OPERATOR);
+	private final Joystick manual = new Joystick(JoystickMap.MANUAL);
 
-		private JoystickButton 
+		private final JoystickButton 
 			liftScale, liftSwitch, liftExchange, liftReset,
 			climbUp, climbDown, intakeIn, intakeClose,
 			intakeEngage, intakeOut, intakeOpen, 
@@ -68,12 +65,13 @@ public class OI {
 		
 		intakeOpen.whenPressed(new OpenClaw());
 		intakeClose.whenPressed(new CloseClaw());
-		intakeEngage.whenActive(new EngageOn());
+//		intakeEngage.whenActive(new EngageOn()); TODO new engage command
 		
-		//TODO kill me please TY
+		//manual overide
 		double liftAxis = manual.getRawAxis(1);
 		manualSafety.whenActive(new LiftManual(liftAxis));
-	
+		
+		//TODO fix me
 		liftScale.whenPressed(new aaRemoveMeLiftUp(0.6));
 		liftSwitch.whenPressed(new aaRemoveMeLiftDown(0.6));
 	}

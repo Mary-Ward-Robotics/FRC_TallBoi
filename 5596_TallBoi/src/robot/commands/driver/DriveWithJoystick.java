@@ -1,4 +1,5 @@
-package robot.commands;
+
+package robot.commands.driver;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;

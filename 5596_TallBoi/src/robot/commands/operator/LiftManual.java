@@ -1,4 +1,4 @@
-package robot.commands;
+package robot.commands.operator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;

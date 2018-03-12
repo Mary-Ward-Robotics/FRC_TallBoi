@@ -1,4 +1,4 @@
-package robot.commands;
+package robot.commands.operator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
@@ -17,7 +17,7 @@ public class CloseClaw extends Command {
     }
 
     protected void execute() {
-    	Robot.delivery.closeClaw();
+    	Robot.delivery.setIntakeClose();
     	commandDone = true;
     }
 
