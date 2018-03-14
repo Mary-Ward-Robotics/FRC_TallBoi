@@ -8,8 +8,13 @@
 package robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.commands.auto.LeftAuto;
+import robot.commands.auto.MiddleAuto;
+import robot.commands.auto.RightAuto;
 import robot.subsystems.ChassisSubsystem;
 import robot.subsystems.ClimbSubsystem;
 import robot.subsystems.DeliverySubsystem;
@@ -30,6 +35,8 @@ public class Robot extends TimedRobot {
 	public static LiftSubsystem lift;
 	public static TechnicalSubsystem technical;
 	public static OI oi;
+	
+	private static SendableChooser<CommandGroup> posSelect;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -45,6 +52,13 @@ public class Robot extends TimedRobot {
 		
 		oi = new OI();
 		
+		posSelect = new SendableChooser<CommandGroup>();
+		posSelect.addObject("Left", new LeftAuto());
+		posSelect.addObject("Middle", new MiddleAuto());
+		posSelect.addObject("Right Auto", new RightAuto());
+		
+		
+		SmartDashboard.putData(posSelect);
 		SmartDashboard.putData(chassis);
 		SmartDashboard.putData(delivery);
 		SmartDashboard.putData(climb);
@@ -67,19 +81,8 @@ public class Robot extends TimedRobot {
 		log();
 	}
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
-	 */
-
 	public void autonomousInit() {
+		
 	}
 
 	/**
