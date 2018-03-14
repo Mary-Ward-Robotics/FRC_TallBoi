@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.subsystems.ChassisSubsystem;
 import robot.subsystems.ClimbSubsystem;
 import robot.subsystems.DeliverySubsystem;
+import robot.subsystems.LiftSubsystem;
 import robot.subsystems.TechnicalSubsystem;
 
 /**
@@ -26,8 +27,8 @@ public class Robot extends TimedRobot {
 	public static ClimbSubsystem climb;
 	public static ChassisSubsystem chassis;
 	public static DeliverySubsystem delivery;
+	public static LiftSubsystem lift;
 	public static TechnicalSubsystem technical;
-	
 	public static OI oi;
 
 	/**
@@ -36,10 +37,12 @@ public class Robot extends TimedRobot {
 	 */
 	
 	public void robotInit() {
-		chassis = new ChassisSubsystem();
+		chassis = new ChassisSubsystem(5,0.02,2,5);
 		delivery = new DeliverySubsystem();
 		climb = new ClimbSubsystem();
 		technical = new TechnicalSubsystem();
+		lift = new LiftSubsystem();
+		
 		oi = new OI();
 		
 		SmartDashboard.putData(chassis);

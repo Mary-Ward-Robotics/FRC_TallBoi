@@ -39,14 +39,16 @@ public class RobotMap {
 	
 	
 	//PDP map
-	public static final int PDP_LDRIVE1 = 0;
-	public static final int PDP_LDRIVE2 = 1;
-	public static final int PDP_RDRIVE1 = 2;
-	public static final int PDP_RDRIVE2 = 3;
-	public static final int PDP_INTAKE  = 4;
-	public static final int PDP_LIFT    = 5;
-	public static final int PDP_CLIMB   = 6;
-	public static final int PDP_ENGAGE  = 7;
-	public static final int PDP_BLINKEN = 8;
-	public static final int PDP_PIGEON  = 9;
+	public static final int PDP_INTAKE  = 0;
+	public static final int PDP_LIFT    = 1;
+	public static final int PDP_CLIMB   = 2;
+	public static final int PDP_ENGAGE  = 3;
+	
+	public static final int PDP_LDRIVE1 = 15;
+	public static final int PDP_LDRIVE2 = 14;
+	public static final int PDP_RDRIVE1 = 13;
+	public static final int PDP_RDRIVE2 = 12;
+	
+	public static final int PDP_BLINKEN = 11;
+	public static final int PDP_PIGEON  = 10;
 }

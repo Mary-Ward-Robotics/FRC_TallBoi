@@ -11,7 +11,7 @@ public class aaRemoveMeLiftDown extends Command {
 	
     public aaRemoveMeLiftDown(double spd) {
     	speed = spd;
-    	requires(Robot.delivery);
+    	requires(Robot.lift);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +20,7 @@ public class aaRemoveMeLiftDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.delivery.setLiftDown(speed);
+    	Robot.lift.setSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,7 +30,6 @@ public class aaRemoveMeLiftDown extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.delivery.setLiftStop();
     }
 
     // Called when another command which requires one or more of the same

@@ -11,8 +11,7 @@ import robot.commands.test.FixStickyFaultPDP;
 public class TechnicalSubsystem extends Subsystem {
 	private static final PowerDistributionPanel m_pdp = new PowerDistributionPanel(RobotMap.PDP);
 	private static final Compressor m_compressor = new Compressor(RobotMap.COMPRESSOR);
-//	private static final 
-
+	
     public void initDefaultCommand() {
     }
     
@@ -81,22 +80,20 @@ public class TechnicalSubsystem extends Subsystem {
     	SmartDashboard.putNumber("PDP power", PDPgetPower());
     	SmartDashboard.putNumber("PDP energy", PDPgetEnergy());
     	SmartDashboard.putNumber("PDP total current", PDPgetCurrent());
-    	SmartDashboard.putNumber("PDP port0 current", PDPgetCurrent(0));
-    	SmartDashboard.putNumber("PDP port1 current", PDPgetCurrent(1));
-    	SmartDashboard.putNumber("PDP port2 current", PDPgetCurrent(2));
-    	SmartDashboard.putNumber("PDP port3 current", PDPgetCurrent(3));
-    	SmartDashboard.putNumber("PDP port4 current", PDPgetCurrent(4));
-    	SmartDashboard.putNumber("PDP port5 current", PDPgetCurrent(5));
-    	SmartDashboard.putNumber("PDP port6 current", PDPgetCurrent(6));
-    	SmartDashboard.putNumber("PDP port7 current", PDPgetCurrent(7));
-    	SmartDashboard.putNumber("PDP port8 current", PDPgetCurrent(8));
-    	SmartDashboard.putNumber("PDP port9 current", PDPgetCurrent(9));
-    	SmartDashboard.putNumber("PDP port10 current", PDPgetCurrent(10));
-    	SmartDashboard.putNumber("PDP port11 current", PDPgetCurrent(11));
-    	SmartDashboard.putNumber("PDP port12 current", PDPgetCurrent(12));
-    	SmartDashboard.putNumber("PDP port13 current", PDPgetCurrent(13));
-    	SmartDashboard.putNumber("PDP port14 current", PDPgetCurrent(14));
-    	SmartDashboard.putNumber("PDP port15 current", PDPgetCurrent(15));
+    	
+    	SmartDashboard.putNumber("PDP intake current", PDPgetCurrent(RobotMap.PDP_INTAKE));
+    	SmartDashboard.putNumber("PDP engage current", PDPgetCurrent(RobotMap.PDP_ENGAGE));
+    	SmartDashboard.putNumber("PDP lift current", PDPgetCurrent(RobotMap.PDP_LIFT));
+    	SmartDashboard.putNumber("PDP climb current", PDPgetCurrent(RobotMap.PDP_CLIMB));
+    	SmartDashboard.putNumber("PDP ldrive1", PDPgetCurrent(RobotMap.PDP_LDRIVE1));
+    	SmartDashboard.putNumber("PDP ldrive2", PDPgetCurrent(RobotMap.PDP_LDRIVE2));
+    	SmartDashboard.putNumber("PDP rdrive1", PDPgetCurrent(RobotMap.PDP_RDRIVE1));
+    	SmartDashboard.putNumber("PDP rdrive2", PDPgetCurrent(RobotMap.PDP_RDRIVE2));
+    	
+    	SmartDashboard.putNumber("PDP blinken current", PDPgetCurrent(RobotMap.PDP_BLINKEN));
+    	SmartDashboard.putNumber("PDP pigeon IMU current", PDPgetCurrent(RobotMap.PDP_PIGEON));
+    	
+//    	SmartDashboard.putNumber();
     	
     	SmartDashboard.putNumber("Compressor current", CgetCurrent());
     	SmartDashboard.putBoolean("Compressor running", CgetRunning());

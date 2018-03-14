@@ -11,7 +11,7 @@ double speed;
 	
     public LiftManual(double spd) {
     	speed = spd;
-    	requires(Robot.delivery);
+    	requires(Robot.lift);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +19,7 @@ double speed;
     }
 
     protected void execute() {
-    	Robot.delivery.setLiftDown(speed/2);
+    	Robot.lift.setSpeed(speed/2);
     }
 
 	protected boolean isFinished() {
@@ -27,6 +27,6 @@ double speed;
 	}
 
     protected void end() {
-    	Robot.delivery.setLiftStop();
+    	Robot.lift.setLiftStop();
     }
 }

@@ -6,33 +6,36 @@ import robot.Robot;
 /**
  *
  */
-public class ClimbDown extends Command {
+public class LiftHold extends Command {
+	private static double setpoint;
+	private static boolean finished;
 	
-    public ClimbDown() {
-        requires(Robot.climb);
+    public LiftHold() {
+        requires(Robot.lift);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	finished = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climb.setClimbSpeed(1);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return finished;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.climb.setClimbStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	finished = true;
     }
 }
