@@ -57,7 +57,6 @@ public class Robot extends TimedRobot {
 		posSelect.addObject("Middle", new MiddleAuto());
 		posSelect.addObject("Right Auto", new RightAuto());
 		
-		
 		SmartDashboard.putData(posSelect);
 		SmartDashboard.putData(chassis);
 		SmartDashboard.putData(delivery);

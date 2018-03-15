@@ -47,12 +47,13 @@ public class ChassisSubsystem extends Subsystem {
 		m_rencoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
 		
 		m_leftPID = new PIDController(kP, kI, kD, kF, m_lencoder, m_ldrive);
+//		m_leftPID.setInputRanges();
 		m_leftPID.setOutputRange(-1, 1);
-//		m_leftPID.setContinuous(true);
+		m_leftPID.setContinuous(true);
 		
 		m_rightPID = new PIDController(kP, kI, kD, kF, m_rencoder, m_rdrive);
 		m_rightPID.setOutputRange(-1, 1);
-//		m_rightPID.setContinuous(true);
+		m_rightPID.setContinuous(true);
 	}
 	
 	public void init() {

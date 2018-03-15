@@ -12,12 +12,14 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import robot.commands.driver.TurboOff;
 import robot.commands.driver.TurboOn;
 import robot.commands.operator.ClimbDown;
+import robot.commands.operator.ClimbStop;
 import robot.commands.operator.ClimbUp;
 import robot.commands.operator.CloseClaw;
-import robot.commands.operator.EngageOn;
+import robot.commands.operator.EngageUp;
 import robot.commands.operator.IntakeIn;
 import robot.commands.operator.IntakeOut;
 import robot.commands.operator.IntakeStop;
+import robot.commands.operator.LiftHold;
 import robot.commands.operator.LiftManual;
 import robot.commands.operator.OpenClaw;
 import robot.commands.operator.aaRemoveMeLiftDown;
@@ -53,13 +55,15 @@ public class OI {
 
 		manualSafety = new JoystickButton(manual, JoystickMap.LT_OVERIDE);
 		
-		//assign commands
+		//driver button control
 		turboHigh.whenPressed(new TurboOn());
 		turboLow.whenPressed(new TurboOff());
 		
 		//climb control
-		climbUp.whenActive(new ClimbUp());
+		climbUp.whenPressed(new ClimbUp());
+		climbUp.whenReleased(new ClimbStop());
 		climbDown.whenActive(new ClimbDown());
+		climbDown.whenReleased(new ClimbStop());
 		
 		//delivery control
 		intakeIn.whenPressed(new IntakeIn());
@@ -71,14 +75,16 @@ public class OI {
 		intakeClose.whenPressed(new CloseClaw());
 //		intakeEngage.whenActive(new EngageOn()); TODO new engage command
 		
-		//manual overide
+		//manual override
 		double liftAxis = manual.getRawAxis(1);
-		manualSafety.whenActive(new LiftManual(liftAxis));
+		manualSafety.whenPressed(new LiftManual(liftAxis));
 		
 		//TODO fix me
 		liftScale.whenPressed(new aaRemoveMeLiftUp(0.6));
+		liftScale.whenReleased(new LiftHold());
 		
 		liftSwitch.whenPressed(new aaRemoveMeLiftDown(0.6));
+		liftSwitch.whenPressed(new LiftHold());
 	}
 	
 	//misc
