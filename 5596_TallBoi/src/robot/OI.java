@@ -14,8 +14,10 @@ import robot.commands.driver.TurboOn;
 import robot.commands.operator.ClimbDown;
 import robot.commands.operator.ClimbUp;
 import robot.commands.operator.CloseClaw;
+import robot.commands.operator.EngageOn;
 import robot.commands.operator.IntakeIn;
 import robot.commands.operator.IntakeOut;
+import robot.commands.operator.IntakeStop;
 import robot.commands.operator.LiftManual;
 import robot.commands.operator.OpenClaw;
 import robot.commands.operator.aaRemoveMeLiftDown;
@@ -60,8 +62,10 @@ public class OI {
 		climbDown.whenActive(new ClimbDown());
 		
 		//delivery control
-		intakeIn.whenActive(new IntakeIn());
-		intakeOut.whenActive(new IntakeOut());
+		intakeIn.whenPressed(new IntakeIn());
+		intakeOut.whenPressed(new IntakeOut());
+		intakeIn.whenReleased(new IntakeStop());
+		intakeOut.whenReleased(new IntakeStop());
 		
 		intakeOpen.whenPressed(new OpenClaw());
 		intakeClose.whenPressed(new CloseClaw());
@@ -73,6 +77,7 @@ public class OI {
 		
 		//TODO fix me
 		liftScale.whenPressed(new aaRemoveMeLiftUp(0.6));
+		
 		liftSwitch.whenPressed(new aaRemoveMeLiftDown(0.6));
 	}
 	

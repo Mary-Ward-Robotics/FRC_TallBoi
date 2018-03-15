@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 import robot.commands.operator.LiftHold;
 
@@ -30,7 +31,7 @@ public class LiftSubsystem extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new LiftHold());
+//    	setDefaultCommand(new LiftHold());
     }
     
     //lift
@@ -71,5 +72,9 @@ public class LiftSubsystem extends Subsystem {
   	protected void usePIDOutput(double output) {
   		m_lift.pidWrite(output);
   	}
+
+	public void log() {
+		SmartDashboard.putNumber("liftpotvalue", returnPIDInput());
+	}
 }
 

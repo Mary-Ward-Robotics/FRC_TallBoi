@@ -62,6 +62,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData(chassis);
 		SmartDashboard.putData(delivery);
 		SmartDashboard.putData(climb);
+		SmartDashboard.putData(lift);
 		log();
 	}
 
@@ -120,6 +121,7 @@ public class Robot extends TimedRobot {
 		delivery.log();
 		climb.log();
 		chassis.log();
+		lift.log();
 		technical.log();
 	}
 }

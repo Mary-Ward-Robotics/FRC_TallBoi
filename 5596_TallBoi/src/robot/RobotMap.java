@@ -32,9 +32,8 @@ public class RobotMap {
 	
 	
 	//CAN bus
-	public static final int PIGEON     = 0; //Pidgeon IMU
-	public static final int COMPRESSOR = 1;
-	public static final int VRM        = 2;
+	public static final int PIGEON     = 2; //Pidgeon IMU
+	public static final int COMPRESSOR = 0;
 	public static final int PDP        = 3;
 	
 	

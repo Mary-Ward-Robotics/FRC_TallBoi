@@ -27,15 +27,15 @@ public class DeliverySubsystem extends Subsystem {
     
     //intake
     public void setIntakeIn() {
-    	m_intake.set(-0.8);
+    	m_intake.set(-0.3);
     }
     
     public void setIntakeOut() {
-    	m_intake.set(0.8);
+    	m_intake.set(0.3);
     }
     
     public void setIntakeStop() {
-    	m_intake.set(0);
+    	m_intake.set(0.05);
     }
     
     public void setIntakeOpen() {
